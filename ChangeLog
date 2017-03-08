@@ -1,0 +1,15 @@
+2016-08-29  Michael Granger  <ged@FaerieMUD.org>
+
+	* .editorconfig, .editorconfig.erb, .gems.erb, .ruby-gemset.erb,
+	.ruby-version.erb, .rvm.gems.erb, .rvmrc.erb, Manifest.txt.erb,
+	Rakefile.erb, spec/[namespace_path]_spec.rb.erb, template.yml:
+	Update with latest conventions
+	[174eb3fccb5b] [tip]
+
+	* .editorconfig, .hgignore.erb, .pryrc.erb, .rvm.gems.erb, .rvmrc.erb,
+	.simplecov.erb, Gemfile, History.md.erb, History.rdoc.erb,
+	README.md.erb, README.rdoc.erb, Rakefile.erb, certs/ged.pem,
+	lib/[namespace_path].rb.erb, spec/[namespace_path]_spec.rb.erb,
+	spec/spec_helper.rb, template.yml:
+	Initial version
+	[e216e8bc10bb]
