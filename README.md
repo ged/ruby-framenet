@@ -15,7 +15,8 @@ docs
 
 ## Description
 
-This is a Ruby interface to FrameNet, a lexical database of English word usage.
+This is a Ruby interface to FrameNet, a lexical database of English word usage. It
+includes version 1.7 of the FrameNet data, and Ruby classes for querying them.
 
 ### Usage
 
@@ -46,8 +47,8 @@ You can look up frames either by name or by numeric ID:
 ## Contributing
 
 You can check out the current development source with Mercurial via its
-{project page}[http://bitbucket.org/ged/framenet]. Or if you prefer Git, via
-{its Github mirror}[https://github.com/ged/framenet].
+[project page](http://bitbucket.org/ged/framenet). Or if you prefer Git, via
+[its Github mirror](https://github.com/ged/framenet).
 
 After checking out the source, run:
 
@@ -61,12 +62,12 @@ and generate the API documentation.
 
 This library includes data from the FrameNet project:
 
-  https://framenet.icsi.berkeley.edu/
+> https://framenet.icsi.berkeley.edu/
 
-It is distributed under the terms of the Creative Commons Attribution
+which is distributed under the terms of the Creative Commons Attribution
 license:
 
-  https://creativecommons.org/licenses/by/4.0/
+> https://creativecommons.org/licenses/by/4.0/
 
 Everything else:
 
