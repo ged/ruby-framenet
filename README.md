@@ -25,11 +25,11 @@ You can look up frames either by name or by numeric ID:
     
     frame = FrameNet[ :Becoming_visible ]
     # => #<FrameNet::Frame:0x007fd84580cfd0 "Becoming_visible" [2582] 5 
-		#      elements, 2 relations, 1 lexical units>
+    #      elements, 2 relations, 1 lexical units>
 
     FrameNet[ 2052 ]
     # => #<FrameNet::Frame:0x007fd84afc4a70 "Fear" [2052] 12 elements, 
-		#      1 relations, 11 lexical units>
+    #      1 relations, 11 lexical units>
 
 
 
