@@ -1,5 +1,6 @@
 .document
 .rdoc_options
+.simplecov
 ChangeLog
 History.md
 LICENSE.txt
@@ -14829,6 +14830,7 @@ lib/framenet.rb
 lib/libxml/monkeypatches.rb
 spec/frame_net/definition_spec.rb
 spec/frame_net/frame/element_spec.rb
+spec/frame_net/frame/lexical_unit_spec.rb
 spec/frame_net/frame_spec.rb
 spec/frame_net/semantic_type_spec.rb
 spec/frame_net_spec.rb
