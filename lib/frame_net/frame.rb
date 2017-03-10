@@ -34,6 +34,7 @@ class FrameNet::Frame
 			raise ArgumentError, "don't know how to load a frame from a %p" % [ name_or_id.class ]
 		end
 	end
+	class << self; alias_method :[], :load; end
 
 
 	### Return a LibXML::XML::Document for the data for the frame named +name+.
@@ -120,6 +121,14 @@ class FrameNet::Frame
 	attr_accessor :lexical_units
 
 
+	### Object equality -- returns +true+ if the receiver repressents the same
+	### FrameNet frame as +other_frame+.
+	def ==( other_frame )
+		return other_frame.is_a?( self.class ) && self.id == other_frame.id
+	end
+	alias_method :eql?, :==
+
+
 	### Return the Frame as a human-readable string suitable for debugging.
 	def inspect
 		return %{#<%p:%#016x "%s" [%d] %d elements, %d relations, %d lexical units>} % [
@@ -133,6 +142,28 @@ class FrameNet::Frame
 		]
 	end
 
+
+	#
+	# Elements
+	#
+
+	### Return the Hash of this Frame's FEs keyed by numeric ID.
+	def elements_by_id
+		return self.elements.each_with_object( {} ) do |el, hash|
+			hash[ el.id ] = el
+		end
+	end
+
+
+	### Return a Hash of this Frame's FEs grouped by core type.
+	def elements_by_core_type
+		return self.elements.group_by( &:core_type )
+	end
+
+
+	#
+	# Relations
+	#
 
 	### Return the FrameNet::Frame::Relations this Frame has as a Hash keyed by the
 	### Relation's type as a String.
@@ -149,10 +180,93 @@ class FrameNet::Frame
 	end
 
 
+	### Return Frames the receiver is inherited by.
+	def is_inherited_by
+		return self.relations_hash[ "Is Inherited by" ].frames
+	end
+
+
+	### Return Frames in which the receiver is one of several perspectives.
+	def perspective_on
+		return self.relations_hash[ "Perspective on" ].frames
+	end
+
+
+	### Return Frames which represent different states of affairs of the receiving
+	### Frame.
+	def is_perspectivized_in
+		return self.relations_hash[ "Is Perspectivized in" ].frames
+	end
+
+
+	### Return Frames the receiver uses in some capacity.
+	def uses
+		return self.relations_hash[ "Uses" ].frames
+	end
+
+
+	### Return Frames the receiver is used by.
+	def is_used_by
+		return self.relations_hash[ "Is Used by" ].frames
+	end
+
+
+	### Return Frames the receiver is a subframe of.
+	def subframe_of
+		return self.relations_hash[ "Subframe of" ].frames
+	end
+
+
+	### Return Frames which are a subframe of the receiver.
+	def has_subframes
+		return self.relations_hash[ "Has Subframe(s)" ].frames
+	end
+	alias_method :has_subframe, :has_subframes
+
+
+	### Return Frames the receiver comes before in a series of subframes of another
+	### Frame.
+	def precedes
+		return self.relations_hash[ "Precedes" ].frames
+	end
+
+
+	### Return Frames the receiver comes after in a series of subframes of another
+	### Frame.
+	def is_preceded_by
+		return self.relations_hash[ "Is Preceded by" ].frames
+	end
+
+
+	### Return Frames in which the receiving frame is an inchoative subframe.
+	def is_inchoative_of
+		return self.relations_hash[ "Is Inchoative of" ].frames
+	end
+
+
+	### Return Frames in which the receiving frame is a causative subframe.
+	def is_causative_of
+		return self.relations_hash[ "Is Causative of" ].frames
+	end
+
+
+	### Return the other members of a group of Frames which should be compared to
+	### the receiving Frame.
+	def see_also
+		return self.relations_hash[ "See also" ].frames
+	end
+
+
+
+	#
+	# Utilities/Testing
+	#
+
 	### Return the XML document that contains the data for the frame (if one exists). Returns
 	### +nil+ if the document doesn't exist.
 	def document
 		return self.class.document_for( self.name )
 	end
+
 
 end # class FrameNet::Frame
