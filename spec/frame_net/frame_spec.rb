@@ -65,6 +65,26 @@ describe FrameNet::Frame do
 	end
 
 
+	describe "FE core sets" do
+
+		it "can return the 'core sets' of frame elements that belong to it" do
+			frame = described_class.load( :Travel )
+			results = frame.core_element_sets
+
+			expect( results ).to be_an( Array ).and( all be_an(Array) ) # array of arrays
+			expect( results.length ).to eq( 2 )
+
+			expect( results[0] ).to contain_exactly(
+				*frame.elements_by_id.values_at( 9786, 2950, 2948, 2945 )
+			)
+			expect( results[1] ).to contain_exactly(
+				*frame.elements_by_id.values_at( 2952, 2949 )
+			)
+		end
+
+	end
+
+
 	describe "relations" do
 
 		it "can return its relations as a Hash keyed by type" do

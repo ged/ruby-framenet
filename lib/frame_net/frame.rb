@@ -59,6 +59,10 @@ class FrameNet::Frame
 			frame.elements = FrameNet::Frame::Element.from_frame_data( doc )
 			frame.relations = FrameNet::Frame::Relation.from_frame_data( doc )
 			frame.lexical_units = FrameNet::Frame::LexicalUnit.from_frame_data( doc )
+
+			frame.core_element_set_ids = doc.find( '//fn:frame/fn:FEcoreSet' ).map do |set_el|
+				set_el.find( './fn:memberFE' ).map {|el| el['ID'].to_i }
+			end
 		end
 	end
 
@@ -74,13 +78,14 @@ class FrameNet::Frame
 
 	### Create a new Frame with the specified +id+, +name+, and +modification_date+.
 	def initialize
-		@id            = nil
-		@name          = nil
-		@creation_time = Time.now
-		@definition    = nil
-		@elements      = []
-		@relations     = []
-		@lexical_units = []
+		@id                   = nil
+		@name                 = nil
+		@creation_time        = Time.now
+		@definition           = nil
+		@elements             = []
+		@relations            = []
+		@lexical_units        = []
+		@core_element_set_ids = []
 
 		yield( self ) if block_given?
 	end
@@ -120,6 +125,10 @@ class FrameNet::Frame
 	# The "lexical units" associated with the frame, as an Array of FrameNet::LexUnits.
 	attr_accessor :lexical_units
 
+	##
+	# The sets of FE IDs that make up the Frame' FEcoreSets.
+	attr_accessor :core_element_set_ids
+
 
 	### Object equality -- returns +true+ if the receiver repressents the same
 	### FrameNet frame as +other_frame+.
@@ -158,6 +167,16 @@ class FrameNet::Frame
 	### Return a Hash of this Frame's FEs grouped by core type.
 	def elements_by_core_type
 		return self.elements.group_by( &:core_type )
+	end
+
+
+	### Return the Frame's core element sets (FEcoreSets) as an Array of
+	### FrameNet::Frame::Elements.
+	def core_element_sets
+		elements = self.elements_by_id
+		return self.core_element_set_ids.map do |id_set|
+			id_set.map {|id| elements[id] }
+		end
 	end
 
 
