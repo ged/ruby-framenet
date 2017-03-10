@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: ruby-framenet 0.1.pre20170309181446 ruby lib
+# stub: ruby-framenet 0.2.pre20170310133852 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "ruby-framenet".freeze
-  s.version = "0.1.pre20170309181446"
+  s.version = "0.2.pre20170310133852"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]

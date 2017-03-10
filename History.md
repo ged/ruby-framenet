@@ -1,3 +1,10 @@
+##  v0.1.0 [2017-03-10] Michael Granger <ged@FaerieMUD.org>
+
+Enhancements:
+
+- Add Frame#core_element_sets.
+
+
 ##  v0.0.2 [2017-03-09] Michael Granger <ged@FaerieMUD.org>
 
 Enhancements:
