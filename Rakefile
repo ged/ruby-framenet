@@ -80,7 +80,7 @@ if File.directory?( '.hg' )
 end
 
 task :gemspec => GEMSPEC
-file GEMSPEC => __FILE__
+file GEMSPEC => [ __FILE__, 'lib/frame_net.rb' ]
 task GEMSPEC do |task|
 	spec = $hoespec.spec
 	spec.files.delete( '.gemtest' )
